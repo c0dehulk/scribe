@@ -1,0 +1,40 @@
+{
+    "name": "codehulk/package-docs",
+    "description": "A documentation generator for packages.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rob Piper",
+            "email": "id+git@codehulk.co.uk"
+        }
+    ],
+    "minimum-stability": "stable",
+    "bin": [
+        "bin/package-docs.php"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Codehulk\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Codehulk\\": "tests/unit/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@bitbucket.org:rpiper/package.git"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "symfony/console": "^3.3",
+        "codehulk/package": "~1.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4"
+    }
+}

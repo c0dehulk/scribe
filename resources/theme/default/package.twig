@@ -1,14 +1,5 @@
 {% extends 'layout.twig' %}
-{% block title %}Deployments{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block content %}
-    <div class="">
-        <h1>Packages</h1>
-        <ul>
-            {% for package in packages %}
-                <li>
-                    <a href="{{ package.getFilename }}">{{ package.getFilename }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+    <div class="readme">{{ readme|raw }}</div>
 {% endblock %}

@@ -52,7 +52,8 @@ class Generator
         foreach ($packages as $package) {
             $page = new PackageIndexPage(
                 $this->createSlug($package->getId()),
-                $package->getId()
+                $package->getId(),
+                $this->twig
             );
             $page->addReadme(
                 new Package\Readme($package)

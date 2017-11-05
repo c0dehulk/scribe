@@ -22,16 +22,21 @@ class PackageIndexPage
     /** @var Readme The readme file. */
     private $readme;
 
+    /** @var \Twig_Environment */
+    private $twig;
+
     /**
      * Constructor.
      *
-     * @param string $id   An identifier for the page.
-     * @param string $name A name of the page.
+     * @param string            $id   An identifier for the page.
+     * @param string            $name A name of the page.
+     * @param \Twig_Environment $twig
      */
-    public function __construct(string $id, string $name)
+    public function __construct(string $id, string $name, \Twig_Environment $twig)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->twig = $twig;
     }
 
     /**
@@ -80,13 +85,12 @@ class PackageIndexPage
      */
     private function getContent(): string
     {
-        return <<<HTML
-<html>
-    <body>
-        <p><a href="index.html">Back to Index</a></p>
-        {$this->readme->getContentAsHtml()}
-    </body>
-</html>
-HTML;
+        return $this->twig->render(
+            'package.twig',
+            [
+                'title'  => $this->name,
+                'readme' => $this->readme->getContentAsHtml(),
+            ]
+        );
     }
 }

@@ -4,15 +4,36 @@ declare(strict_types = 1);
 namespace Codehulk\PackageDocs;
 
 use Exception;
+use Twig_Environment;
 
 /**
  * IndexPage
  */
 class IndexPage
 {
+    /** @var Twig_Environment */
+    private $twig;
+
     /** @var PackageIndexPage[] */
     private $pages;
 
+    /**
+     * Constructor.
+     *
+     * @param Twig_Environment $twig
+     */
+    public function __construct(Twig_Environment $twig)
+    {
+        $this->twig = $twig;
+    }
+
+    /**
+     * Adds a package to the index.
+     *
+     * @param PackageIndexPage $page
+     *
+     * @return void
+     */
     public function addPackage(PackageIndexPage $page)
     {
         $this->pages[] = $page;
@@ -31,19 +52,10 @@ class IndexPage
      */
     private function getContent(): string
     {
-        $packages = '';
-        foreach ($this->pages as $page) {
-            $packages .= "<li><a href=\"{$page->getFilename()}\">{$page->getFilename()}</a></li>";
-        }
-
-        return <<<HTML
-<html>
-    <body>
-        <h1>Packages</h1>
-        <ul>{$packages}</ul>
-    </body>
-</html>
-HTML;
+        return $this->twig->render(
+            'index.twig',
+            ['packages' => $this->pages]
+        );
     }
 
 

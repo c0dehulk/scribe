@@ -3,6 +3,9 @@ declare(strict_types = 1);
 
 namespace Codehulk\PackageDocs;
 
+use DI\ContainerBuilder;
+use Interop\Container\ContainerInterface;
+
 /**
  * The Package Documentor application.
  *
@@ -16,8 +19,25 @@ class App extends \Symfony\Component\Console\Application
      */
     public function __construct()
     {
-        parent::__construct('Package Documentor');
+        $container = $this->buildContainer();
 
-        $this->addCommands([new Command\Generate()]);
+        parent::__construct('Package Documentor');
+        $this->addCommands(
+            [
+                $container->get(Command\Generate::class),
+            ]
+        );
+    }
+
+    /**
+     * Builds the DI container for the application.
+     *
+     * @return ContainerInterface
+     */
+    private function buildContainer(): ContainerInterface
+    {
+        $builder = new ContainerBuilder();
+        $builder->addDefinitions(require __DIR__ . '/../../config/di.config.php');
+        return $builder->build();
     }
 }

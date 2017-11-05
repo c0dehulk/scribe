@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Codehulk\PackageDocs;
 
 use Codehulk\Package;
+use Twig_Environment;
 
 /**
  * A documentation generator.
@@ -13,19 +14,39 @@ use Codehulk\Package;
  */
 class Generator
 {
+    /** @var Twig_Environment */
+    private $twig;
+
+    /**
+     * Constructor.
+     *
+     * @param Twig_Environment $twig
+     */
+    public function __construct(Twig_Environment $twig)
+    {
+        $this->twig = $twig;
+    }
+
     /**
      * Generates documentation for a set of packages.
      *
      * @param Package\Finder $packages The packages to generate documentation for.
-     * @param string         $path     The path to write the documentation to.
+     * @param Config         $config
      *
      * @return void
      */
-    public function createDocs(Package\Finder $packages, string $path)
+    public function createDocs(Package\Finder $packages, Config $config)
     {
+        $path = $config->getOutputPath();
         $this->createOutputFolder($path);
 
-        $index = new IndexPage();
+
+        $theme = $config->getThemePath();
+        @mkdir($path . '/assets');
+        copy($theme . '/assets/style.css', $path . '/assets/style.css');
+        copy($theme . '/assets/markdown.css', $path . '/assets/markdown.css');
+
+        $index = new IndexPage($this->twig);
 
         /** @var Package\PackageInterface $package */
         foreach ($packages as $package) {

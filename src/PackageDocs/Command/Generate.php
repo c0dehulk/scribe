@@ -6,7 +6,6 @@ namespace Codehulk\PackageDocs\Command;
 use Codehulk\Package;
 use Codehulk\PackageDocs\ConfigFile;
 use Codehulk\PackageDocs\Generator;
-use Codehulk\PackageDocs\RenderableInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -19,6 +18,20 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class Generate extends Command
 {
+    /** @var Generator */
+    private $generator;
+
+    /**
+     * Constructor.
+     *
+     * @param Generator $generator A documentation generator.
+     */
+    public function __construct(Generator $generator)
+    {
+        parent::__construct();
+        $this->generator = $generator;
+    }
+
     /**
      * @inheritdoc
      */
@@ -52,8 +65,7 @@ class Generate extends Command
         );
 
         // Generate the documentation.
-        $generator = new Generator();
-        $generator->createDocs($finder, $config->getOutputPath());
+        $this->generator->createDocs($finder, $config);
 
         $output->writeln('Done.');
         return 0;

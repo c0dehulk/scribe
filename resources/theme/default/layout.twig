@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %} - Package Documentor</title>
+        <link href="assets/style.css" rel="stylesheet" type="text/css" />
+        <link href="assets/markdown.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="sidebar"></div>
+        <div class="content markdown-body">{% block content %}{% endblock %}</div>
+    </body>
+</html>

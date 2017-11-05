@@ -58,4 +58,18 @@ class Config
     {
         return (string) $this->config['output']['path'] ?? '';
     }
+
+    /**
+     * Gets the path to write the documentation to.
+     *
+     * @return string
+     */
+    public function getThemePath(): string
+    {
+        $path = realpath($this->config['output']['theme'] ?? '');
+        if (!$path) {
+            $path = __DIR__ . '/../../resources/theme/default';
+        }
+        return $path;
+    }
 }

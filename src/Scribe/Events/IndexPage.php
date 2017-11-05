@@ -1,21 +1,24 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\PackageDocs;
+namespace Codehulk\Scribe\Events;
 
 use Exception;
 use Twig_Environment;
 
 /**
- * IndexPage
+ * An index page for events.
+ *
+ * @package Codehulk\Scribe\Events
+ * @api
  */
 class IndexPage
 {
     /** @var Twig_Environment */
     private $twig;
 
-    /** @var PackageIndexPage[] */
-    private $pages;
+    /** @var string[] */
+    private $events;
 
     /**
      * Constructor.
@@ -30,20 +33,14 @@ class IndexPage
     /**
      * Adds a package to the index.
      *
-     * @param PackageIndexPage $page
+     * @param string $name The name of the event to add.
      *
      * @return void
      */
-    public function addPackage(PackageIndexPage $page)
+    public function add(string $name)
     {
-        $this->pages[] = $page;
+        $this->events[] = $name;
     }
-
-    public function getFilename(): string
-    {
-        return 'index.html';
-    }
-
 
     /**
      * Gets the contents of the page.
@@ -53,8 +50,8 @@ class IndexPage
     private function getContent(): string
     {
         return $this->twig->render(
-            'index.twig',
-            ['packages' => $this->pages]
+            'events.twig',
+            ['events' => $this->events]
         );
     }
 
@@ -69,7 +66,7 @@ class IndexPage
      */
     public function write(string $path)
     {
-        $filename = $path . '/' . $this->getFilename();
+        $filename = $path . '/events.html';
         $isSuccess = file_put_contents($filename, $this->getContent());
         if ($isSuccess === false) {
             throw new Exception('Unable to write page.');

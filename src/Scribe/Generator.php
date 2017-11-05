@@ -49,6 +49,8 @@ class Generator
 
         $index = new IndexPage($this->twig);
 
+        $eventIndex = new Events\IndexPage($this->twig);
+
         $this->twig->addGlobal('application', $config->getTitle());
         $this->twig->addGlobal('version', $version);
 
@@ -66,9 +68,15 @@ class Generator
             $page->write($path);
 
             $index->addPackage($page);
+
+            $events = new Events\EventFinder($package);
+            foreach ($events as $event) {
+                $eventIndex->add($event);
+            }
         }
 
         $index->write($path);
+        $eventIndex->write($path);
     }
 
     /**

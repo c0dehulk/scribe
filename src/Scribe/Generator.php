@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\PackageDocs;
+namespace Codehulk\Scribe;
 
 use Codehulk\Package;
 use Twig_Environment;
@@ -9,7 +9,7 @@ use Twig_Environment;
 /**
  * A documentation generator.
  *
- * @package Codehulk\PackageDocs
+ * @package Codehulk\Scribe
  * @api
  */
 class Generator

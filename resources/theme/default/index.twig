@@ -6,7 +6,7 @@
         <ul>
             {% for package in packages %}
                 <li>
-                    <a href="{{ package.getFilename }}">{{ package.getFilename }}</a>
+                    <a href="{{ package.getFilename }}">{{ package.getName }}</a>
                 </li>
             {% endfor %}
         </ul>

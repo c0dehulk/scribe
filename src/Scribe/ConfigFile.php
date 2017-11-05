@@ -1,12 +1,12 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\PackageDocs;
+namespace Codehulk\Scribe;
 
 /**
  * A configuration file.
  *
- * @package Codehulk\PackageDocs
+ * @package Codehulk\Scribe
  */
 class ConfigFile extends Config
 {

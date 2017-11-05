@@ -8,5 +8,5 @@ chdir(__DIR__ . '/..');
 require 'vendor/autoload.php';
 
 // Run the console application.
-$app = new \Codehulk\PackageDocs\App();
+$app = new \Codehulk\Scribe\App();
 $app->run();

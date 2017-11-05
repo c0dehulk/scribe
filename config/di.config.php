@@ -7,5 +7,5 @@ use function DI\factory;
  * Configuration for DI container.
  */
 return [
-    \Twig_Environment::class => factory([\Codehulk\PackageDocs\Template\ServiceFactory::class, 'create']),
+    \Twig_Environment::class => factory([\Codehulk\Scribe\Template\ServiceFactory::class, 'create']),
 ];

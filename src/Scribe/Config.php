@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\PackageDocs;
+namespace Codehulk\Scribe;
 
 /**
  * A configuration interface.
@@ -75,6 +75,6 @@ class Config
 
     public function getTitle(): string
     {
-        return (string) ($this->config['output']['title'] ?? 'Documentation');
+        return (string) ($this->config['output']['title'] ?? 'Scribe');
     }
 }

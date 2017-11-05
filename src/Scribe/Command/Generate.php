@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\PackageDocs\Command;
+namespace Codehulk\Scribe\Command;
 
 use Codehulk\Package;
-use Codehulk\PackageDocs\ConfigFile;
-use Codehulk\PackageDocs\Generator;
+use Codehulk\Scribe\ConfigFile;
+use Codehulk\Scribe\Generator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * A command to generate package documentation from a configuration file.
  *
- * @package Codehulk\PackageDocs
+ * @package Codehulk\Scribe
  */
 class Generate extends Command
 {

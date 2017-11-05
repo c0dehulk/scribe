@@ -1,5 +1,5 @@
 {
-    "name": "codehulk/package-docs",
+    "name": "codehulk/scribe",
     "description": "A documentation generator for packages.",
     "type": "library",
     "license": "MIT",
@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "stable",
     "bin": [
-        "bin/package-docs.php"
+        "bin/scribe.php"
     ],
     "autoload": {
         "psr-4": {

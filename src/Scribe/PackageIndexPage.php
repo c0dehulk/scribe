@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\PackageDocs;
+namespace Codehulk\Scribe;
 
 use Codehulk\Package\Readme;
 use Exception;
@@ -9,7 +9,7 @@ use Exception;
 /**
  * A renderer for a package index page.
  *
- * @package Codehulk\PackageDocs
+ * @package Codehulk\Scribe
  */
 class PackageIndexPage
 {
@@ -92,5 +92,15 @@ class PackageIndexPage
                 'readme' => $this->readme->getContentAsHtml(),
             ]
         );
+    }
+
+    /**
+     * Gets...
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

@@ -1,15 +1,15 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\PackageDocs;
+namespace Codehulk\Scribe;
 
 use DI\ContainerBuilder;
 use Interop\Container\ContainerInterface;
 
 /**
- * The Package Documentor application.
+ * The Scribe command-line application.
  *
- * @package Codehulk\PackageDocs
+ * @package Codehulk\Scribe
  * @api
  */
 class App extends \Symfony\Component\Console\Application
@@ -21,7 +21,7 @@ class App extends \Symfony\Component\Console\Application
     {
         $container = $this->buildContainer();
 
-        parent::__construct('Package Documentor');
+        parent::__construct('Scribe');
         $this->addCommands(
             [
                 $container->get(Command\Generate::class),

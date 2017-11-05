@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\PackageDocs\Template;
+namespace Codehulk\Scribe\Template;
 
 use Interop\Container\ContainerInterface;
 use Twig;
@@ -9,7 +9,7 @@ use Twig;
 /**
  * A factory responsible for instantiating Twig.
  *
- * @package Codehulk\PackageDocs\Template
+ * @package Codehulk\Scribe\Template
  */
 class ServiceFactory
 {

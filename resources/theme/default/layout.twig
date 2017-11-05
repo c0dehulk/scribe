@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{% block title %}{% endblock %} - Package Documentor</title>
+        <title>{% block title %}{% endblock %} - {{ application }}</title>
         <link href="assets/style.css" rel="stylesheet" type="text/css" />
         <link href="assets/markdown.css" rel="stylesheet" type="text/css" />
     </head>
@@ -12,10 +12,7 @@
             <h3>Sections</h3>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="packages.html">Packages</a></li>
             </ul>
-            <h3>Packages</h3>
-            <input type="search" />
         </div>
         <div class="content markdown-body">{% block content %}{% endblock %}</div>
     </body>

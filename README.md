@@ -1,4 +1,4 @@
-# Package Documentor
+# Scribe
 This library contains tooling for generating documentation for Packages.
 
 
@@ -6,7 +6,13 @@ This library contains tooling for generating documentation for Packages.
 To run the documentation generator, use the `generate` command:
 
 ```
-vendor/bin/package-docs generate --config path/to/config.php
+vendor/bin/scribe generate --config=path/to/config.php
+```
+
+### Versioning
+To tag the documentation with a specific build, or version, use the `build` option:
+```
+vendor/bin/scribe generate --config=path/to/config.php --build=1.2.3
 ```
 
 ## License

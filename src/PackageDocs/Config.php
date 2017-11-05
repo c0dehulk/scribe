@@ -72,4 +72,9 @@ class Config
         }
         return $path;
     }
+
+    public function getTitle(): string
+    {
+        return (string) ($this->config['output']['title'] ?? 'Documentation');
+    }
 }

@@ -45,6 +45,13 @@ class Generate extends Command
             InputOption::VALUE_REQUIRED,
             'The configuration file to use.'
         );
+        $this->addOption(
+            'build',
+            'b',
+            InputOption::VALUE_OPTIONAL,
+            'The build/version number to generate the documentation with.',
+            ''
+        );
     }
 
     /**
@@ -65,7 +72,7 @@ class Generate extends Command
         );
 
         // Generate the documentation.
-        $this->generator->createDocs($finder, $config);
+        $this->generator->createDocs($finder, $config, $input->getOption('build'));
 
         $output->writeln('Done.');
         return 0;

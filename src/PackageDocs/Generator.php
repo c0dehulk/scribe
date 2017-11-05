@@ -32,10 +32,11 @@ class Generator
      *
      * @param Package\Finder $packages The packages to generate documentation for.
      * @param Config         $config
+     * @param string         $version
      *
      * @return void
      */
-    public function createDocs(Package\Finder $packages, Config $config)
+    public function createDocs(Package\Finder $packages, Config $config, string $version)
     {
         $path = $config->getOutputPath();
         $this->createOutputFolder($path);
@@ -47,6 +48,10 @@ class Generator
         copy($theme . '/assets/markdown.css', $path . '/assets/markdown.css');
 
         $index = new IndexPage($this->twig);
+
+        $this->twig->addGlobal('application', $config->getTitle());
+        $this->twig->addGlobal('version', $version);
+
 
         /** @var Package\PackageInterface $package */
         foreach ($packages as $package) {

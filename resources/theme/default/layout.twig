@@ -6,7 +6,17 @@
         <link href="assets/markdown.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <div class="sidebar"></div>
+        <div class="sidebar">
+            <h1>{{ application }}</h1>
+            <h2>{{ version }}</h2>
+            <h3>Sections</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="packages.html">Packages</a></li>
+            </ul>
+            <h3>Packages</h3>
+            <input type="search" />
+        </div>
         <div class="content markdown-body">{% block content %}{% endblock %}</div>
     </body>
 </html>

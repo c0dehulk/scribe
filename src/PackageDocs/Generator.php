@@ -25,6 +25,8 @@ class Generator
     {
         $this->createOutputFolder($path);
 
+        $index = new IndexPage();
+
         /** @var Package\PackageInterface $package */
         foreach ($packages as $package) {
             $page = new PackageIndexPage(
@@ -35,7 +37,11 @@ class Generator
                 new Package\Readme($package)
             );
             $page->write($path);
+
+            $index->addPackage($page);
         }
+
+        $index->write($path);
     }
 
     /**

@@ -83,6 +83,7 @@ class PackageIndexPage
         return <<<HTML
 <html>
     <body>
+        <p><a href="index.html">Back to Index</a></p>
         {$this->readme->getContentAsHtml()}
     </body>
 </html>

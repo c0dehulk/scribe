@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Codehulk\Scribe;
 
 use DI\ContainerBuilder;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * The Scribe command-line application.

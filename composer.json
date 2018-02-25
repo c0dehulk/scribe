@@ -26,17 +26,17 @@
     "repositories": [
         {
             "type": "git",
-            "url": "git@bitbucket.org:rpiper/package.git"
+            "url": "git@github.com:c0dehulk/package-tools.git"
         }
     ],
     "require": {
         "php": "^7.0",
-        "symfony/console": "^3.3",
-        "codehulk/package": "~1.0.0",
-        "twig/twig": "^2.4",
-        "php-di/php-di": "^5.4"
+        "symfony/console": "~3.4.0",
+        "codehulk/package-tools": "dev-master#786af97eb05179beb468c5575ecfea9f5a139e0b",
+        "twig/twig": "~2.4.0",
+        "php-di/php-di": "~6.0.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.4"
+        "phpunit/phpunit": "~6.5.0"
     }
 }

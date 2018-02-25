@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Codehulk\Scribe\Template;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Twig;
 
 /**

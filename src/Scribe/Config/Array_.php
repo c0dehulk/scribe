@@ -4,10 +4,10 @@ declare(strict_types = 1);
 namespace Codehulk\Scribe\Config;
 
 /**
- * A configuration reader for an array.
+ * An array-based Scribe configuration reader.
  *
  * @package Codehulk\Scribe
- * @public
+ * @private
  */
 class Array_ implements ConfigInterface
 {
@@ -24,13 +24,17 @@ class Array_ implements ConfigInterface
         $this->config = $config;
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     public function getComposerPath(): string
     {
         return (string) $this->config['composer']['path'] ?? '';
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     public function getPackageRoots(): array
     {
         $roots = $this->config['packages']['roots'] ?? [];
@@ -43,19 +47,25 @@ class Array_ implements ConfigInterface
         return $roots;
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     public function getOutputPath(): string
     {
         return (string) $this->config['output']['path'] ?? '';
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     public function getThemePath(): string
     {
         return (string) $this->config['output']['theme'] ?? '';
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     public function getTitle(): string
     {
         return (string) ($this->config['output']['title'] ?? 'Scribe');

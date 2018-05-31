@@ -34,7 +34,9 @@ class GenerateCommand extends Command
         $this->generator = $generator;
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     protected function configure()
     {
         $this->setName('generate');
@@ -53,7 +55,9 @@ class GenerateCommand extends Command
         );
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Generating documentation...');

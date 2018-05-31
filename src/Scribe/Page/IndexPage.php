@@ -6,11 +6,14 @@ namespace Codehulk\Scribe\Page;
 use Codehulk\Scribe\Theme\ThemeInterface;
 
 /**
- * IndexPage
+ * An index page.
+ *
+ * @package Codehulk\Scribe
+ * @private
  */
 class IndexPage implements PageInterface
 {
-    /** @var PackageIndexPage[] */
+    /** @var PageInterface[] An array of pages to include in the index. */
     private $pages;
 
     /** @var ThemeInterface */
@@ -38,13 +41,25 @@ class IndexPage implements PageInterface
         $this->pages[] = $page;
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
+    public function getName(): string
+    {
+        return 'Index';
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getFilename(): string
     {
         return 'index.html';
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     public function getContent(): string
     {
         return $this->theme->render(

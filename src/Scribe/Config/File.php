@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Codehulk\Scribe\Config;
 
 /**
- * A configuration reader for a file.
+ * A file-based Scribe configuration reader.
  *
  * @package Codehulk\Scribe
  * @public

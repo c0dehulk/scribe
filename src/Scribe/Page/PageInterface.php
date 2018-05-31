@@ -12,7 +12,16 @@ namespace Codehulk\Scribe\Page;
 interface PageInterface
 {
     /**
+     * Gets the name of the page.
+     *
+     * @return string
+     */
+    public function getName(): string;
+
+    /**
      * Gets the filename of the page.
+     *
+     * @return string
      */
     public function getFilename(): string;
 

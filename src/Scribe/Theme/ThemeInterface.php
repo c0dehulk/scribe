@@ -5,6 +5,9 @@ namespace Codehulk\Scribe\Theme;
 
 /**
  * Describes a theme.
+ *
+ * @package Codehulk\Scribe
+ * @public
  */
 interface ThemeInterface
 {
@@ -15,7 +18,17 @@ interface ThemeInterface
      */
     public function getAssetsPath(): string;
 
-    public function setGlobalValues(array $globals);
+    /**
+     * Sets the default parameters for themes.
+     *
+     * @return void
+     */
+    public function setDefaultParameters(array $parameters);
 
+    /**
+     * Renders a template.
+     *
+     * @return void
+     */
     public function render(string $template, array $parameters): string;
 }

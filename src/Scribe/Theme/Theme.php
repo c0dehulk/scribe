@@ -6,12 +6,24 @@ namespace Codehulk\Scribe\Theme;
 use Twig;
 
 /**
- * Theme
+ * A theme.
+ *
+ * @package Codehulk\Scribe
+ * @private
  */
 class Theme implements ThemeInterface
 {
+    /** @var string The path the theme is located in. */
     private $path;
 
+    /** @var mixed[] The default parameters to use when rendering a template. */
+    private $defaultParameters = [];
+
+    /**
+     * Constructor.
+     *
+     * @param string $path A path the theme is located in.
+     */
     public function __construct(string $path)
     {
         $this->path = realpath($path);
@@ -20,10 +32,29 @@ class Theme implements ThemeInterface
         }
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     public function getAssetsPath(): string
     {
         return $this->path . '/assets';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setDefaultParameters(array $parameters)
+    {
+        $this->defaultParameters = $parameters;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render(string $template, array $parameters = []): string
+    {
+        $context = array_merge($this->defaultParameters, $parameters);
+        return $this->getTwig()->render($template, $context);
     }
 
     /**
@@ -36,17 +67,5 @@ class Theme implements ThemeInterface
         return new Twig\Environment(
             new Twig\Loader\FilesystemLoader($this->path)
         );
-    }
-
-    public function setGlobalValues(array $globals)
-    {
-        foreach ($globals as $key => $value) {
-            $this->getTwig()->addGlobal($key, $value);
-        }
-    }
-
-    public function render(string $template, array $parameters): string
-    {
-        return $this->getTwig()->render($template, $parameters);
     }
 }

@@ -37,7 +37,6 @@ class App extends \Symfony\Component\Console\Application
     private function buildContainer(): ContainerInterface
     {
         $builder = new ContainerBuilder();
-        $builder->addDefinitions(require __DIR__ . '/../../../config/di.config.php');
         return $builder->build();
     }
 }

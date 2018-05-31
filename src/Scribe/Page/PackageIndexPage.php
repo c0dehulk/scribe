@@ -5,33 +5,33 @@ namespace Codehulk\Scribe\Page;
 
 use Codehulk\Package\Readme;
 use Codehulk\Scribe\Theme\ThemeInterface;
-use Exception;
 
 /**
- * A renderer for a package index page.
+ * A package index page.
  *
  * @package Codehulk\Scribe
+ * @private
  */
 class PackageIndexPage implements PageInterface
 {
     /** @var string The identifier for the page. */
     private $id;
 
-    /** @var string the name of the page. */
+    /** @var string The name of the page. */
     private $name;
 
     /** @var Readme The readme file. */
     private $readme;
 
-    /** @var ThemeInterface */
+    /** @var ThemeInterface The theme to create the page with. */
     private $theme;
 
     /**
      * Constructor.
      *
-     * @param string         $id   An identifier for the page.
-     * @param string         $name A name of the page.
-     * @param ThemeInterface $theme
+     * @param string         $id    An identifier for the page.
+     * @param string         $name  A name of the page.
+     * @param ThemeInterface $theme The theme to create the page with.
      */
     public function __construct(string $id, string $name, ThemeInterface $theme)
     {
@@ -41,24 +41,24 @@ class PackageIndexPage implements PageInterface
     }
 
     /**
-     * Adds a readme file to the page.
-     *
-     * @param Readme $readme A readme file.
-     *
-     * @return void
+     * @inheritdoc
      */
-    public function addReadme(Readme $readme)
+    public function getName(): string
     {
-        $this->readme = $readme;
+        return $this->name;
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     public function getFilename(): string
     {
         return $this->id . '.html';
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     */
     public function getContent(): string
     {
         return $this->theme->render(
@@ -71,12 +71,14 @@ class PackageIndexPage implements PageInterface
     }
 
     /**
-     * Gets...
+     * Adds a readme file to the page.
      *
-     * @return string
+     * @param Readme $readme A readme file.
+     *
+     * @return void
      */
-    public function getName(): string
+    public function addReadme(Readme $readme)
     {
-        return $this->name;
+        $this->readme = $readme;
     }
 }

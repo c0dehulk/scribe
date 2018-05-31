@@ -1,0 +1,32 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types = 1);
+
+// Find the path to the composer autoloader.
+$paths = [
+    'As a Project' => __DIR__ . '/../vendor/autoload.php',
+    'As a Library' => __DIR__ . '/../../../../vendor/autoload.php',
+];
+$autoloader = null;
+foreach ($paths as $path) {
+    $path = realpath($path);
+    if ($path !== false) {
+        $autoloader = $path;
+        break;
+    }
+}
+
+// If we can't find an autoloader, stop here.
+if (!$autoloader) {
+    echo "Unable to locate Composer autoloader.\nPlease run `composer install` to use Scribe.\n";
+    exit(1);
+}
+
+// Bootstrap the script.
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
+require_once $autoloader;
+
+// Run the console application.
+$app = new \Codehulk\Scribe\Cli\App();
+$app->run();

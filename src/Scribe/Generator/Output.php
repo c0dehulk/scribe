@@ -9,41 +9,37 @@ use Exception;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * Output
+ * An output handler.
+ *
+ * @package Codehulk\Scribe
+ * @private
  */
 class Output
 {
-    /** @var Filesystem */
+    /** @var Filesystem The filesystem. */
     private $fs;
 
+    /** @var string The path to write output files to. */
+    private $path;
+
     /**
-     * @param Filesystem $fs
+     * Constructor.
      *
-     * @return void
+     * @param Filesystem $fs A filesystem.
      */
     public function __construct(Filesystem $fs)
     {
         $this->fs = $fs;
-        $this->path = __DIR__ . '/../../../build/output';
     }
 
-    public function addThemeAssets(Theme\ThemeInterface $theme)
+    /**
+     * Gets the current output path.
+     *
+     * @return string
+     * @throws Exception Thrown if no output path is set.
+     */
+    public function getPath(): string
     {
-        $outputAssetsPath = $this->getPath() . '/assets';
-        $this->fs->mkdir($outputAssetsPath);
-        $this->fs->mirror($theme->getAssetsPath(), $outputAssetsPath);
-    }
-
-    public function addPage(Page\PageInterface $page)
-    {
-        $filename = $this->getPath() . '/' . $page->getFilename();
-        $isSuccess = file_put_contents($filename, $page->getContent());
-        if ($isSuccess === false) {
-            throw new Exception('Unable to write page.');
-        }
-    }
-
-    public function getPath(): string {
         if (!$this->path) {
             throw new \Exception('Output path not set.');
         }
@@ -51,23 +47,50 @@ class Output
     }
 
     /**
-     * Creates the output folder for the documentation.
+     * Sets the output path, creating the folder if it doesn't exist, and deleting any existing files in that location.
      *
-     * @param string $path The path to create.
+     * @param string $path The path to use as the output path.
      *
      * @return void
-     * @throws \Exception Thrown if the folder cannot be created or written to.
      */
     public function setPath(string $path)
     {
-        $existingPath = realpath($path);
-        if ($existingPath) {
-            $this->fs->remove($existingPath);
+        if ($this->fs->exists($path)) {
+            $this->fs->remove($path);
         }
+        $this->fs->mkdir($path, 02775);
 
-        $isSuccess = mkdir($path, 0775, true) && chmod($path, 02775);
-        if (!$isSuccess) {
-            throw new \Exception("Unable to create documentation folder: '{$path}'.");
+        $this->path = realpath($path);
+    }
+
+    /**
+     * Adds theme assets to the output files.
+     *
+     * @param Theme\ThemeInterface $theme A theme.
+     *
+     * @return void
+     */
+    public function addThemeAssets(Theme\ThemeInterface $theme)
+    {
+        $outputAssetsPath = $this->getPath() . '/assets';
+        $this->fs->mkdir($outputAssetsPath);
+        $this->fs->mirror($theme->getAssetsPath(), $outputAssetsPath);
+    }
+
+    /**
+     * Adds a page to the output.
+     *
+     * @param Page\PageInterface $page A page.
+     *
+     * @return void
+     * @throws Exception Thrown if unable to write the page to disk.
+     */
+    public function addPage(Page\PageInterface $page)
+    {
+        $filename = $this->getPath() . '/' . $page->getFilename();
+        $isSuccess = file_put_contents($filename, $page->getContent());
+        if ($isSuccess === false) {
+            throw new Exception('Unable to write page.');
         }
     }
 }

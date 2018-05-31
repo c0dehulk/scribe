@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\Scribe;
+namespace Codehulk\Scribe\Cli;
 
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
@@ -10,7 +10,7 @@ use Psr\Container\ContainerInterface;
  * The Scribe command-line application.
  *
  * @package Codehulk\Scribe
- * @api
+ * @public
  */
 class App extends \Symfony\Component\Console\Application
 {
@@ -19,12 +19,12 @@ class App extends \Symfony\Component\Console\Application
      */
     public function __construct()
     {
-        $container = $this->buildContainer();
-
         parent::__construct('Scribe');
+
+        $container = $this->buildContainer();
         $this->addCommands(
             [
-                $container->get(Command\Generate::class),
+                $container->get(GenerateCommand::class),
             ]
         );
     }
@@ -37,7 +37,7 @@ class App extends \Symfony\Component\Console\Application
     private function buildContainer(): ContainerInterface
     {
         $builder = new ContainerBuilder();
-        $builder->addDefinitions(require __DIR__ . '/../../config/di.config.php');
+        $builder->addDefinitions(require __DIR__ . '/../../../config/di.config.php');
         return $builder->build();
     }
 }

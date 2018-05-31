@@ -1,12 +1,13 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\Scribe\Command;
+namespace Codehulk\Scribe\Cli;
 
 use Codehulk\Package;
-use Codehulk\Scribe\ConfigFile;
-use Codehulk\Scribe\Generator;
+use Codehulk\Scribe\Config;
+use Codehulk\Scribe\Generator\Generator;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -15,10 +16,11 @@ use Symfony\Component\Console\Output\OutputInterface;
  * A command to generate package documentation from a configuration file.
  *
  * @package Codehulk\Scribe
+ * @private
  */
-class Generate extends Command
+class GenerateCommand extends Command
 {
-    /** @var Generator */
+    /** @var Generator The documentation generator. */
     private $generator;
 
     /**
@@ -32,17 +34,14 @@ class Generate extends Command
         $this->generator = $generator;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     protected function configure()
     {
         $this->setName('generate');
         $this->setDescription('Generates package documentation.');
-        $this->addOption(
+        $this->addArgument(
             'config',
-            'c',
-            InputOption::VALUE_REQUIRED,
+            InputArgument::REQUIRED,
             'The configuration file to use.'
         );
         $this->addOption(
@@ -54,15 +53,13 @@ class Generate extends Command
         );
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Generating documentation...');
 
         // Load the configuration.
-        $config = new ConfigFile($input->getOption('config'));
+        $config = new Config\File($input->getArgument('config'));
 
         // Set the packages to find.
         $composer = new Package\ComposerJson($config->getComposerPath());

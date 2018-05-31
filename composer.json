@@ -23,20 +23,15 @@
             "Codehulk\\": "tests/unit/"
         }
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:c0dehulk/package-tools.git"
-        }
-    ],
     "require": {
         "php": "^7.0",
-        "symfony/console": "~3.4.0",
-        "codehulk/package-tools": "dev-master#786af97eb05179beb468c5575ecfea9f5a139e0b",
-        "twig/twig": "~2.4.0",
-        "php-di/php-di": "~6.0.0"
+        "symfony/console": "^2.0",
+        "codehulk/package-tools": "^0.1",
+        "twig/twig": "^2.0",
+        "php-di/php-di": "^6.0",
+        "symfony/filesystem": "^3.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.5.0"
+        "phpunit/phpunit": "^6.5"
     }
 }

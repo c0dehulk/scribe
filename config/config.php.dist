@@ -1,0 +1,21 @@
+<?php
+/**
+ *
+ */
+return [
+    'composer' => [
+        'path' => __DIR__ . '/absolute/path/to/composer.json',
+    ],
+    'packages' => [
+        'roots' => [
+            'Name\\Space\\One',
+            'Name\\Space\\Two',
+        ],
+    ],
+    'output'   => [
+        'title' => 'Title for Documentation',
+        'path'  => __DIR__ . '/absolute/path/to/output/folder',
+        'theme' => __DIR__ . '../resources/theme/default',
+    ],
+];
+

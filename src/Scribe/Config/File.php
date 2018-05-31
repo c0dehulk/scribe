@@ -1,14 +1,15 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\Scribe;
+namespace Codehulk\Scribe\Config;
 
 /**
- * A configuration file.
+ * A configuration reader for a file.
  *
  * @package Codehulk\Scribe
+ * @public
  */
-class ConfigFile extends Config
+class File extends Array_ implements ConfigInterface
 {
     /**
      * Constructor.
@@ -21,6 +22,10 @@ class ConfigFile extends Config
         if (!$realpath) {
             throw new \InvalidArgumentException('Invalid configuration file.');
         }
-        parent::__construct(require $path);
+        $content = require $path;
+        if (!is_array($content)) {
+            throw new \InvalidArgumentException('Configuration files must be an array.');
+        }
+        parent::__construct($content);
     }
 }

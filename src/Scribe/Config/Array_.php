@@ -1,12 +1,15 @@
 <?php
 declare(strict_types = 1);
 
-namespace Codehulk\Scribe;
+namespace Codehulk\Scribe\Config;
 
 /**
- * A configuration interface.
+ * A configuration reader for an array.
+ *
+ * @package Codehulk\Scribe
+ * @public
  */
-class Config
+class Array_ implements ConfigInterface
 {
     /** @var array The configuration array. */
     private $config;
@@ -21,22 +24,13 @@ class Config
         $this->config = $config;
     }
 
-    /**
-     * Gets the location of the composer.json file.
-     *
-     * @return string
-     */
+    /** @inheritdoc */
     public function getComposerPath(): string
     {
         return (string) $this->config['composer']['path'] ?? '';
     }
 
-    /**
-     * Gets the namespaces to treat as package roots.
-     *
-     * @return array
-     * @throws \Exception Thrown if no package roots are specified.
-     */
+    /** @inheritdoc */
     public function getPackageRoots(): array
     {
         $roots = $this->config['packages']['roots'] ?? [];
@@ -49,30 +43,19 @@ class Config
         return $roots;
     }
 
-    /**
-     * Gets the path to write the documentation to.
-     *
-     * @return string
-     */
+    /** @inheritdoc */
     public function getOutputPath(): string
     {
         return (string) $this->config['output']['path'] ?? '';
     }
 
-    /**
-     * Gets the path to write the documentation to.
-     *
-     * @return string
-     */
+    /** @inheritdoc */
     public function getThemePath(): string
     {
-        $path = realpath($this->config['output']['theme'] ?? '');
-        if (!$path) {
-            $path = __DIR__ . '/../../resources/theme/default';
-        }
-        return $path;
+        return (string) $this->config['output']['theme'] ?? '';
     }
 
+    /** @inheritdoc */
     public function getTitle(): string
     {
         return (string) ($this->config['output']['title'] ?? 'Scribe');
